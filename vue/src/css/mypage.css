@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+.center {
+	width: 700px;
+	margin: 0 auto;
+	margin-top : 100px;
+	text-align: center;
+}
+
+h2 {
+	padding-left: 1px;
+	text-align: left;
+	margin-bottom: 20px;
+}
+
+table {
+	margin: 0 auto;
+	text-align: center;
+	background-color: #F2F2F2;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+#title {
+	text-align: left;
+	font-size: 120%;
+}
+
+.left {
+	padding : 10px 10px 10px 10px;
+	text-align: right;
+}
+
+.right {
+	padding: 10px 10px 10px 10px;
+	text-align: left;
+}

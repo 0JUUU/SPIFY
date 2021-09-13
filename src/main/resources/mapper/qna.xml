@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.house.model.dao.QnaMapper">
+
+	<select id="select" resultType="qnaDto">
+		select * 
+		from qna 
+		where no=#{no}
+	</select>
+	
+	<select id="selectByUser" resultType="qnaDto">
+		select * 
+		from qna
+		where writerName like concat("%", #{word}, "%")
+	</select>
+	
+	<select id="selectByTitle" resultType="qnaDto">
+		select * 
+		from qna
+		where title like concat("%", #{word}, "%")
+	</select>
+	
+	<select id="selectByContent" resultType="qnaDto">
+		select * 
+		from qna
+		where content like concat("%", #{word}, "%")
+	</select>
+	
+	<select id="selectAll" resultType="qnaDto">
+		select *
+		from qna
+		order by no desc;
+	</select>
+	
+	<insert id="qnaRegister" parameterType="qnaDto">
+		insert into qna
+		values(#{no}, #{title},#{writer},#{writerName}, #{content}, now())
+	</insert>
+	
+	<update id="qnaModify" parameterType="qnaDto">
+		update qna
+		set writer=#{writer}, writerName=#{writerName}, title=#{title}, content=#{content}, regDate=now()
+		where no=#{no}
+	</update>
+	
+	<delete id="qnaDelete" parameterType="int">
+		delete from qna 
+		where no=#{no}
+	</delete>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.house.model.dao.MapMapper">
+
+	<!-- 동 코드 조회 -->
+	<select id="getDongCode" parameterType="String" resultType="String">
+		select distinct(LEFT(dongcode,5))
+		from dongcode 
+		where dong like concat('%','${value}','%')
+	</select>
+	
+	<!-- 선택한 집 상세정보 -->
+	<select id="getHouseDetail" parameterType="int" resultType="HouseDto">
+		select *
+		from housedeal 
+		where no = ${value}
+	</select>
+	
+	
+	<!-- 하우스 리스트 동-->
+	<select id="getHouseListDong" parameterType="String" resultType="HouseDto">
+		select * from housedeal where dong like concat('%', '${vaule}','%') limit 1
+	</select>
+
+	<!-- 하우스 리스트 이름-->
+	<select id="getHouseListName" parameterType="String" resultType="HouseDto">
+		select * from housedeal where aptName like concat('%', '${vaule}','%')
+	</select>
+</mapper>
+

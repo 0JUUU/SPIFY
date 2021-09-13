@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.house.model.dao.HouseDealMapper">
+
+	<select id="searchAll" parameterType="map" resultType="HouseInfoDto">
+		select no,dong,AptName,code,buildYear,lat, lng
+		from houseinfo
+		order by no asc
+	</select>
+	
+	<select id="searchAptName" resultType="HouseInfoDto">
+		select no,dong,AptName,code,buildYear,lat, lng
+		from houseinfo
+		where aptName like concat('%','${aptName}','%')
+		and dong like #{dong}
+		order by no asc
+	</select>
+	
+	<select id="searchDongName" resultType="HouseInfoDto">
+		select no,dong,AptName,code,buildYear,lat, lng
+		from houseinfo
+		where dong like #{dong}
+		order by no asc
+	</select>
+	
+	<select id="show" resultType="housedealDto">
+		select no,dong,AptName,code,dealAmount,buildYear,dealYear,dealMonth,dealDay,area,floor,jibun
+		from housedeal
+		where no = ${no}
+		order by no asc
+	</select>
+	
+	<select id="getTotalCount" parameterType="map" resultType="int">
+		select count(no)
+		from housedeal
+		<if test="word != null and word != ''">
+			<if test="key == 'subject'">
+				where subject like concat('%', #{word}, '%')
+			</if>
+			<if test="key != 'subject'">
+				where #{key} = #{word}
+			</if>
+		</if>
+	</select>
+	
+	<select id="aptList" resultType="HouseDealDto">
+		select hd.dong, hd.AptName, hd.dealAmount, hd.dealYear, hd.dealMonth, hd.dealDay, hd.area, hd.floor, hd.jibun, hi.lat, hi.lng 
+		FROM housedeal hd join houseinfo hi
+		on hd.AptName = hi.AptName and hd.dong = hi.dong
+		where hi.AptName=#{aptName} and hi.dong=#{dong}
+	</select>
+	
+	<select id="priceList" resultType="HouseAmountPerAreaDto">
+		select hd.dong, hi.AptName, avg(replace(hd.dealAmount, ',', '')) as "avgAmount", avg(area) as "avgArea", ROUND(round(avg(replace(hd.dealAmount, ',', ''))/avg(hd.area), 4)*10000) "amountPerArea"
+		FROM housedeal hd join houseinfo hi
+		on hd.AptName = hi.AptName
+		and hd.dong = hi.dong
+		where hi.dong = #{dong}
+		group by hi.AptName
+		order by amountPerArea;
+	</select>
+</mapper>

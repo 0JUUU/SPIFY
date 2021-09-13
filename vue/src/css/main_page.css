@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+.article {
+   background-color: #F8F8F7;
+   overflow: auto;
+}
+
+.article .dong_search {
+   margin-top: 20px;
+   margin-left: 5px;
+   padding-left: 40px;
+   padding-top: 100px;
+   padding-bottom: 80px;
+   width: 50%;
+   float: left;
+   box-sizing: border-box;
+   text-align: center;
+   background-color: #DBF9C8;
+}
+
+.sido, .gu, .dong{
+	width: 15%;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	font-size: 15px;
+}
+.search_dong{
+	width: 15%;
+	font-size: 15px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+.article .dong_search img {
+   width: 40%;
+}
+
+.article div h2 {
+   margin-top: 30px;
+}
+
+.article div ul {
+   display: flex;
+   flex-wrap: wrap;
+   list-style:none;
+}
+
+.article div ul li {
+   margin: 5px;
+   height: 180px;
+   flex-grow: 1;
+}
+
+.article div ul li img {
+   max-height: 100%;
+   min-width: 100%;
+   object-fit: cover;
+   vertical-align: bottom;
+}
+
+
+@media ( max-aspect-ratio : 1/1) {
+   li {
+      height: 30vh;
+   }
+}
+
+@media ( max-height : 480px) {
+   li {
+      height: 80vh;
+   }
+}
+
+@media ( max-aspect-ratio : 1/1) and (max-width: 480px) {
+   ul {
+      flex-direction: row;
+   }
+   li {
+      height: auto;
+      width: 100%;
+   }
+   article div ul li img {
+      width: 100%;
+      max-height: 75vh;
+      min-width: 0;
+   }
+}
+
+.search_dong {
+   color: #009688;
+   background: #fff;
+   border: 0px solid #009688;
+   font-size: 15px;
+
+   font-weight: normal;
+   margin: 6px 0;
+   margin-right: 12px;
+   display: inline-block;
+   text-decoration: none;
+   min-width: 80px;
+}
+
+.search_dong:hover,
+.search_dong:active {
+   color: #fff;
+   background: #009688;
+}
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR");
+template {
+   font-family: "Noto Sans KR", sans-serif;
+}
